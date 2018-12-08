@@ -1,0 +1,74 @@
+// Snippet 1
+			List<Record> records = new ArrayList<Record>();
+
+// Snippet 2
+					Record record = Record.createRecord(columns[YEAR_COLUMN], columns[QUARTER_COLUMN], 
+						columns[MONTH_COLUMN],columns[DAY_OF_MONTH_COLUMN], columns[DAY_OF_WEEK_COLUMN], 
+						columns[FLIGHT_DATE_COLUMN], columns[CARRIER_COLUMN], columns[ORIGIN_COLUMN], 
+						columns[DESTINATION_COLUMN], columns[DEPARTURE_TIME_COLUMN], columns[DELAY_COLUMN], 
+						columns[CANCELLED_COLUMN]);
+					records.add(record);
+
+// Snippet 3
+			LocalDateTime startSort = LocalDateTime.now();
+			Collections.sort(records, (Record r1, Record r2)-> r1.getFlightDate().compareTo(r2.getFlightDate()));
+			logger.info("Records sort: "+ records.size()+ " duration: "+Duration.between(startSort, LocalDateTime.now()));
+
+// Snippet 4
+			LocalDateTime startFind = LocalDateTime.now();
+			ArrayList<Record> foundRecords = new ArrayList<Record>();
+			Record foundRecord = findRecord(records,"5640","SBA", "SFO","2015-01-29","1229","0.00");
+			if (foundRecord != null) {
+				foundRecords.add(foundRecord);
+				logger.info("Found record ");
+			}
+			foundRecord = findRecord(records, "742","SEA", "SMF","2015-01-09","0705","0.00");
+			if (foundRecord != null) {
+				foundRecords.add(foundRecord);
+				logger.info("Found record ");
+			}
+			foundRecord = findRecord(records,"5640","SBA", "SFO","2015-01-29","1229","0.00");
+			if (foundRecord != null) {
+				foundRecords.add(foundRecord);
+				logger.info("Found record ");
+			}
+
+// Snippet 5
+			LocalDateTime startDelete = LocalDateTime.now();
+			records.removeAll(foundRecords);
+
+// Snippet 6
+			SortedMap<String, Record> records = new ConcurrentSkipListMap<String,Record>();
+
+// Snippet 7
+					Record record = Record.createRecord(columns[YEAR_COLUMN], columns[QUARTER_COLUMN], 
+							columns[MONTH_COLUMN],columns[DAY_OF_MONTH_COLUMN], columns[DAY_OF_WEEK_COLUMN], 
+							columns[FLIGHT_DATE_COLUMN], columns[CARRIER_COLUMN], columns[ORIGIN_COLUMN], 
+							columns[DESTINATION_COLUMN], columns[DEPARTURE_TIME_COLUMN], columns[DELAY_COLUMN], 
+							columns[CANCELLED_COLUMN]);
+					String key = buildKey(columns);
+					records.put(buildKey(columns), record);
+
+// Snippet 8
+			LocalDateTime startFind = LocalDateTime.now();
+			ArrayList<String> foundKeys = new ArrayList<String>();
+			String key = "";
+			Record foundRecord = records.get(key=buildKey("5640","SBA", "SFO","2015-01-29","1229","0.00"));
+			if (foundRecord != null) {
+				foundKeys.add(key);
+			}
+			foundRecord = records.get(key=buildKey("742","SEA", "SMF","2015-01-09","0705","0.00"));
+			if (foundRecord != null) {
+				foundKeys.add(key);
+			}
+			foundRecord = records.get(key=buildKey("5640","SBA", "SFO","2015-01-29","1229","0.00"));
+			if (foundRecord != null) {
+				foundKeys.add(key);
+			}
+
+// Snippet 9
+			LocalDateTime startDelete = LocalDateTime.now();
+			for (Iterator iterator = foundKeys.iterator(); iterator.hasNext();) {
+				String keytoDelete = (String) iterator.next();
+				records.remove(keytoDelete);				
+			}

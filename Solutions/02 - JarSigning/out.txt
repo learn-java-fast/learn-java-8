@@ -1,0 +1,21 @@
+
+s        339 Sun Dec 27 16:55:10 CST 2015 META-INF/MANIFEST.MF
+         446 Sun Dec 27 16:55:10 CST 2015 META-INF/SERVER-A.SF
+        1347 Sun Dec 27 16:55:10 CST 2015 META-INF/SERVER-A.RSA
+           0 Sun Dec 27 16:47:22 CST 2015 META-INF/
+sm       571 Sun Dec 27 16:47:16 CST 2015 com/example/mypackage/Main.class
+sm       523 Sun Dec 27 16:47:16 CST 2015 com/example/mypackage/util/Utility.class
+
+  s = signature was verified 
+  m = entry is listed in manifest
+  k = at least one certificate was found in keystore
+  i = at least one certificate was found in identity scope
+
+jar verified.
+
+Warning: 
+This jar contains entries whose certificate chain is not validated.
+This jar contains entries whose signer certificate will expire within six months. 
+This jar contains signatures that does not include a timestamp. Without a timestamp, users may not be able to validate this jar after the signer certificate's expiration date (2016-03-26) or after any future revocation date.
+
+Re-run with the -verbose and -certs options for more details.
