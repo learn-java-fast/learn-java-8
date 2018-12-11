@@ -1,0 +1,93 @@
+package com.mcnz.lambda.example;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class LambdaExamples {
+
+	public static void main(String[] args) {
+		
+		String[] toys =  {"games", "TRUCKS", "dolls", "Consoles","bikes","abc"};
+		
+		/********* A S S I G N M E N T *********/
+		// Use a lambda expression to replace the inner class
+		Arrays.sort(toys, new Comparator<String>() {
+			@Override
+			public int compare(String a, String b) {
+				return a.length()-b.length();
+			}
+			
+		});
+		
+		
+		List<String> gifts = Arrays.asList(toys);
+		
+		/********* A S S I G N M E N T *********/
+		//instead of the code below, 
+		//pass a UnaryOperator function 
+		//to the replaceAll method
+		for (int i=0;i<gifts.size();i++) {
+			gifts.set(i, gifts.get(i).toLowerCase());
+		}
+		
+		/********* A S S I G N M E N T *********/
+		// replace the code below
+		// by passing a Consumer function
+		// to the ArrayList's forEach method
+		for (String gift : gifts) {
+			System.out.println(gift);
+		}
+		 
+		
+		ArrayList<String> games = new ArrayList<String>();
+		games.add("Fortnite");
+		games.add("Clue");
+		games.add("Operation");
+		
+		
+		/********* A S S I G N M E N T *********/
+		// Replace the following by passing
+		// a predicate function to the
+		// removeIf method
+		for (int i = 0; i < games.size(); i++) {
+			if (games.get(i).length()<5) {
+				games.remove(i);
+			}
+		}
+		
+		/********* A S S I G N M E N T *********/
+		//Use the forEach method to print out
+		//the value of each element in the games array
+		for (String game : games) {
+			System.out.println(game);
+		}
+		
+		Map<String, Integer> jobs = new HashMap<>();
+		
+		jobs.put("Jr Developer", 40000);
+		jobs.put("Sr Developer", 30000);
+		jobs.put("Architect", 50000);
+		
+		/********* A S S I G N M E N T *********/
+		//Replace the following line of code 
+		//using a pre-Java-8 syntax
+		jobs.forEach((k,v)->System.out.println("Job : " + k + " Salary : " + v));
+		
+
+		/********* A S S I G N M E N T *********/
+		//Using a single iterative loop, implement the logic performed
+		//by the lambda functions using a pre-Java-8 syntax
+		jobs.computeIfAbsent("Jr Programmer", s -> s.length()*10000);
+		jobs.computeIfPresent("Architect", (k,v) -> k.length()*10000);
+		jobs.computeIfPresent("Sr Programmer",(k,v) -> k.length()*10000);
+		jobs.replaceAll((job, salary)->new Integer(salary.toString().replaceAll("0", "5")));
+		
+		jobs.forEach((k,v)->System.out.println("Job : " + k + " Salary : " + v));
+
+	}
+
+}
